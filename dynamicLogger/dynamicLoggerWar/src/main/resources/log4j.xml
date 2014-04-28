@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+	<appender name="FA" class="org.apache.log4j.FileAppender">
+		<param name="File" value="logs/was-logger-slf4j.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ISO8601} [%t] %-5p (%c{1}) %x - %m%n" />
+		</layout>
+	</appender>
+	<logger name="org.dmhweb" additivity="false">
+		<level value="info" />
+		<appender-ref ref="FA"/>
+	</logger>
+	<root>
+		<level value="info" />
+		<appender-ref ref="FA" />
+	</root>
+</log4j:configuration>
