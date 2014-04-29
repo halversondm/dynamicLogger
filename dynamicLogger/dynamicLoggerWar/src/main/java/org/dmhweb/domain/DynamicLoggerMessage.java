@@ -1,7 +1,6 @@
 package org.dmhweb.domain;
 
 import java.io.Serializable;
-import java.security.Principal;
 
 /**
  * Serializable class to pass the information to the listener from the update
@@ -16,7 +15,7 @@ public class DynamicLoggerMessage implements Serializable {
 
 	private String logger;
 	private String level;
-	private Principal principal;
+	private String updatedBy;
 
 	public String getLogger() {
 		return logger;
@@ -34,18 +33,18 @@ public class DynamicLoggerMessage implements Serializable {
 		this.level = level;
 	}
 
-	public Principal getPrincipal() {
-		return principal;
+	public String getUpdatedBy() {
+		return updatedBy;
 	}
 
-	public void setPrincipal(final Principal principal) {
-		this.principal = principal;
+	public void setUpdatedBy(final String updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 
 	@Override
 	public String toString() {
 		return "DynamicLoggerMessage [logger=" + logger + ", level=" + level
-				+ ", principal=" + principal + "]";
+				+ ", updatedBy=" + updatedBy + "]";
 	}
 
 }

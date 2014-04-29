@@ -93,7 +93,7 @@ public class DynamicLoggerService {
 					.entity("User Login required to process update to logger level")
 					.build();
 		} else {
-			message.setPrincipal(context.getUserPrincipal());
+			message.setUpdatedBy(context.getUserPrincipal().getName());
 			dynamicLoggerMessager.sendMessage(message);
 			return Response.ok().build();
 		}

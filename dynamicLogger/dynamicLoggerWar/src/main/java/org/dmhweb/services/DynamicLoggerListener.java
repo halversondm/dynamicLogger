@@ -41,8 +41,8 @@ public class DynamicLoggerListener implements MessageListener {
 				Level level = Level.toLevel(dynamicLogger.getLevel());
 				loggerToChange.setLevel(level);
 
-				String user = dynamicLogger.getPrincipal() == null ? "unknown"
-						: dynamicLogger.getPrincipal().getName();
+				String user = dynamicLogger.getUpdatedBy() == null ? "unknown"
+						: dynamicLogger.getUpdatedBy();
 
 				logger.info(
 						"A log level change for logger {} to level {} was requested by {}",
