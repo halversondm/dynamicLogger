@@ -1,6 +1,8 @@
 package org.dmhweb.services;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -18,6 +20,7 @@ import javax.ws.rs.core.SecurityContext;
 import org.apache.log4j.LogManager;
 import org.dmhweb.domain.ActiveLogger;
 import org.dmhweb.domain.ActiveLoggerGroup;
+import org.dmhweb.domain.AvailableLevel;
 import org.dmhweb.domain.DynamicLoggerMessage;
 import org.dmhweb.services.intf.DynamicLoggerMessager;
 import org.slf4j.Logger;
@@ -30,12 +33,16 @@ public class DynamicLoggerService {
 	private static final Logger logger = LoggerFactory
 			.getLogger(DynamicLoggerService.class);
 
+	private static final String[] levelList = { "off", "trace", "debug",
+			"error", "info", "warn", "all" };
+
 	@EJB
 	private DynamicLoggerMessager dynamicLoggerMessager;
 
 	@Context
 	private SecurityContext context;
 
+	@SuppressWarnings("rawtypes")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveActiveLoggers() {
@@ -50,7 +57,10 @@ public class DynamicLoggerService {
 		ActiveLogger activeRootLogger = new ActiveLogger();
 		org.apache.log4j.Logger rootLogger = LogManager.getRootLogger();
 		activeRootLogger.setName(rootLogger.getName());
-		activeRootLogger.setCurrentLevel(rootLogger.getLevel().toString());
+		String rootCurrentLevel = rootLogger.getLevel().toString();
+		activeRootLogger.setCurrentLevel(rootCurrentLevel);
+		activeRootLogger.getAvailableLevel().addAll(
+				buildAvailableLevels(rootCurrentLevel));
 		group.getActiveLoggers().add(activeRootLogger);
 
 		// add 'children' loggers. Those from the configuration file and those
@@ -61,19 +71,39 @@ public class DynamicLoggerService {
 
 			ActiveLogger activeLogger = new ActiveLogger();
 			activeLogger.setName(frameworkLogger.getName());
+			String currentLevel = null;
 			if (frameworkLogger.getLevel() == null) {
-				activeLogger.setCurrentLevel(frameworkLogger.getParent()
-						.getLevel().toString());
+				currentLevel = frameworkLogger.getParent().getLevel()
+						.toString();
 			} else {
-				activeLogger.setCurrentLevel(frameworkLogger.getLevel()
-						.toString());
+				currentLevel = frameworkLogger.getLevel().toString();
 			}
+			activeLogger.setCurrentLevel(currentLevel);
+			activeLogger.getAvailableLevel().addAll(
+					buildAvailableLevels(currentLevel));
 			group.getActiveLoggers().add(activeLogger);
 
 		}
 
 		return Response.ok().entity(group).build();
 
+	}
+
+	private List<AvailableLevel> buildAvailableLevels(final String currentLevel) {
+		List<AvailableLevel> availableLevels = new ArrayList<AvailableLevel>();
+
+		for (String level : levelList) {
+			AvailableLevel availableLevel = new AvailableLevel();
+			if (level.equalsIgnoreCase(currentLevel)) {
+				availableLevel.setCurrent(true);
+			} else {
+				availableLevel.setCurrent(false);
+			}
+			availableLevel.setLevel(level);
+			availableLevels.add(availableLevel);
+		}
+
+		return availableLevels;
 	}
 
 	@POST
