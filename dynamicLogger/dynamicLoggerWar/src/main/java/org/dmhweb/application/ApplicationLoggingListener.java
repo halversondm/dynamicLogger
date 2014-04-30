@@ -7,7 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Start up logging
+ * Start up logging. Not sure if this is a WebSphere Liberty thing, but want
+ * logging available before anything else loads since nothing else seems to load
+ * automatically at all. In other application servers this may not be necessary.
  * 
  */
 public class ApplicationLoggingListener implements ServletContextListener {

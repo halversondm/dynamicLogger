@@ -5,6 +5,13 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * Represents the current state of one logger and the potential levels available
+ * to it.
+ * 
+ * @author dan
+ * 
+ */
 @XmlRootElement
 public class ActiveLogger {
 

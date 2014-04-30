@@ -1,5 +1,11 @@
 package org.dmhweb.domain;
 
+/**
+ * Represents a log level and if the level is set on a logger
+ * 
+ * @author dan
+ * 
+ */
 public class AvailableLevel {
 
 	private String level;

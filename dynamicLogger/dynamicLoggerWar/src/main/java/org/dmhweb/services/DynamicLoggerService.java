@@ -26,6 +26,13 @@ import org.dmhweb.services.intf.DynamicLoggerMessager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * REST services to send logger level information to the requestor and update a
+ * logger level
+ * 
+ * @author dan
+ * 
+ */
 @Stateless
 @Path("/")
 public class DynamicLoggerService {
