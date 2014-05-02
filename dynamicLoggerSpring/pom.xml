@@ -22,9 +22,15 @@
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.0</version>
+				<version>2.2</version>
 				<configuration>
 					<port>8181</port>
+					<httpsPort>8282</httpsPort>
+					<contextFile>${basedir}/src/main/webapp/META-INF/context.xml</contextFile>
+					<keystoreFile>${basedir}/src/main/webapp/META-INF/keystore.jks</keystoreFile>
+					<tomcatUsers>${basedir}/src/main/webapp/META-INF/tomcat-users.xml</tomcatUsers>
+					<keystorePass>admin123</keystorePass>
+					<useSeparateTomcatClassLoader>true</useSeparateTomcatClassLoader>
 				</configuration>
 				<dependencies>
 					<dependency>
