@@ -14,7 +14,7 @@
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<jaxrs:server id="jaxRSServer" address="/secured/dynamicLogger">
+	<jaxrs:server id="jaxRSServer" address="/dynamicLogger">
 		<jaxrs:serviceBeans>
 			<ref bean="dynamicLoggerService" />
 		</jaxrs:serviceBeans>

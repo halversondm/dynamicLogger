@@ -2,13 +2,13 @@
 
 <Context antiJARLocking="true" path="/dynamicLoggerSpringWar">
 
-	<Resource name="jms/Topic" auth="Container"
-		type="org.apache.activemq.command.ActiveMQTopic" description="my Topic"
-		factory="org.apache.activemq.jndi.JNDIReferenceFactory" physicalName="FOO.BAR" />
-
 	<Resource name="jms/TopicConnectionFactory" auth="Container"
 		type="org.apache.activemq.ActiveMQConnectionFactory" description="JMS Connection Factory"
 		factory="org.apache.activemq.jndi.JNDIReferenceFactory" brokerURL="vm://localhost"
 		brokerName="LocalActiveMQBroker" />
+		
+	<Resource name="jms/Topic" auth="Container"
+		type="org.apache.activemq.command.ActiveMQTopic" description="my Topic"
+		factory="org.apache.activemq.jndi.JNDIReferenceFactory" physicalName="FOO.BAR" />
 
 </Context>

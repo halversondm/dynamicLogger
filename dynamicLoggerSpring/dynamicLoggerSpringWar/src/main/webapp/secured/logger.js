@@ -1,7 +1,7 @@
 var myFunction = {
 	
 	getLoggers: function() {
-		$.getJSON("./dynamicLogger", function(data) {
+		$.getJSON("../securedService/dynamicLogger/", function(data) {
 			myFunction.processLoggers(data);
 		});
 		
@@ -17,7 +17,7 @@ var myFunction = {
 				if (alevel.current) {
 					html +=  alevel.level;
 				} else {
-					html += '<a href="./dynamicLogger/update/' + activeLogger.name + '/' + alevel.level + '">' + alevel.level + '</a>';
+					html += '<a href="../securedService/dynamicLogger/update/' + activeLogger.name + '/' + alevel.level + '">' + alevel.level + '</a>';
 				}
 				html += '&nbsp';
 			});

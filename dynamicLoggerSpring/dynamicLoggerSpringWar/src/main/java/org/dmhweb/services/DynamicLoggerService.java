@@ -24,7 +24,6 @@ import org.dmhweb.domain.DynamicLoggerMessage;
 import org.dmhweb.services.intf.DynamicLoggerMessager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 /**
  * REST services to send logger level information to the requestor and update a
@@ -33,8 +32,6 @@ import org.springframework.stereotype.Service;
  * @author dan
  * 
  */
-@Service
-@Path("/")
 public class DynamicLoggerService {
 
 	private static final Logger logger = LoggerFactory
@@ -78,13 +75,8 @@ public class DynamicLoggerService {
 
 			ActiveLogger activeLogger = new ActiveLogger();
 			activeLogger.setName(frameworkLogger.getName());
-			String currentLevel = null;
-			if (frameworkLogger.getLevel() == null) {
-				currentLevel = frameworkLogger.getParent().getLevel()
-						.toString();
-			} else {
-				currentLevel = frameworkLogger.getLevel().toString();
-			}
+			String currentLevel = frameworkLogger.getEffectiveLevel()
+					.toString();
 			activeLogger.setCurrentLevel(currentLevel);
 			activeLogger.getAvailableLevel().addAll(
 					buildAvailableLevels(currentLevel));

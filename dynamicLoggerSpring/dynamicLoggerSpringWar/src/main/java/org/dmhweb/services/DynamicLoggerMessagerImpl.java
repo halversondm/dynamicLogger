@@ -45,7 +45,7 @@ public class DynamicLoggerMessagerImpl implements DynamicLoggerMessager {
 
 		try {
 			connection = topicConnectionFactory.createTopicConnection();
-			session = connection.createTopicSession(true,
+			session = connection.createTopicSession(false,
 					Session.AUTO_ACKNOWLEDGE);
 			publisher = session.createPublisher(topic);
 
