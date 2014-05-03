@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * 
  */
 @XmlRootElement
-public class ActiveLogger {
+public class ActiveLogger implements Comparable<ActiveLogger> {
 
 	private String name;
 	private String currentLevel;
@@ -46,6 +46,11 @@ public class ActiveLogger {
 	public String toString() {
 		return "ActiveLogger [name=" + name + ", currentLevel=" + currentLevel
 				+ ", availableLevel=" + availableLevel + "]";
+	}
+
+	@Override
+	public int compareTo(final ActiveLogger o) {
+		return name.compareTo(o.name);
 	}
 
 }

@@ -1,0 +1,47 @@
+<server description="dynamicLoggerTestServer">
+
+	<!-- Enable features -->
+	<featureManager>
+		<feature>servlet-3.0</feature>
+		<feature>wasJmsClient-1.1</feature>
+		<feature>wasJmsServer-1.0</feature>
+		<feature>jmsMdb-3.1</feature>
+		<feature>localConnector-1.0</feature>
+		<feature>jaxrs-1.1</feature>
+		<feature>ejbLite-3.1</feature>
+		<feature>ssl-1.0</feature>
+		<feature>jndi-1.0</feature>
+		<feature>appSecurity-2.0</feature>
+		<feature>jsp-2.2</feature>
+	    <feature>jsf-2.0</feature>
+    </featureManager>
+
+	<httpEndpoint host="localhost" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
+	<applicationMonitor updateTrigger="mbean"/>
+
+	<jmsTopic id="dynamicLoggerTopic" jndiName="jms/DynamicLoggerTopic">
+		<properties.wasJms/>
+	</jmsTopic>
+	<jmsTopicConnectionFactory id="dynamicLoggerTCF" jndiName="jms/DynamicLoggerTCF">
+		<properties.wasJms/>
+	</jmsTopicConnectionFactory>
+
+	<jmsActivationSpec id="dynamicLoggerEar/dynamicLoggerWar-1.0.0-SNAPSHOT/jms/DynamicLoggerListener">
+		<properties.wasJms destinationRef="dynamicLoggerTopic" destinationType="javax.jms.Topic"/>
+	</jmsActivationSpec>
+	<keyStore password="{xor}PjsyNjFubWw="/>
+	<basicRegistry id="myRegistry">
+		<user name="admin" password="{xor}PjsyNjFubWw="/>
+		<group name="AdminGroup">
+			<member name="admin"/>
+		</group>
+	</basicRegistry>
+
+	<enterpriseApplication id="dynamicLoggerEar" location="dynamicLoggerEar.ear" name="dynamicLoggerEar">
+		<application-bnd>
+			<security-role name="monitor">
+				<group name="AdminGroup"/>
+			</security-role>
+		</application-bnd>
+	</enterpriseApplication>
+</server>

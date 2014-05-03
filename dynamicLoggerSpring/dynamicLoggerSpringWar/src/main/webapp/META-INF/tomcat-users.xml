@@ -17,5 +17,5 @@
 -->
 <tomcat-users>
   <role rolename="monitor"/>
-  <user username="admin" password="admin" roles="monitor"/>
+  <user username="admin" password="admin123" roles="monitor"/>
 </tomcat-users>

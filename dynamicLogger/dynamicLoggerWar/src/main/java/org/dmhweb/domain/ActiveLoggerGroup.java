@@ -1,6 +1,7 @@
 package org.dmhweb.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -21,6 +22,10 @@ public class ActiveLoggerGroup {
 			activeLoggers = new ArrayList<ActiveLogger>();
 		}
 		return activeLoggers;
+	}
+
+	public void sortList() {
+		Collections.sort(activeLoggers);
 	}
 
 }

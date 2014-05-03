@@ -78,19 +78,16 @@ public class DynamicLoggerService {
 
 			ActiveLogger activeLogger = new ActiveLogger();
 			activeLogger.setName(frameworkLogger.getName());
-			String currentLevel = null;
-			if (frameworkLogger.getLevel() == null) {
-				currentLevel = frameworkLogger.getParent().getLevel()
-						.toString();
-			} else {
-				currentLevel = frameworkLogger.getLevel().toString();
-			}
+			String currentLevel = frameworkLogger.getEffectiveLevel()
+					.toString();
 			activeLogger.setCurrentLevel(currentLevel);
 			activeLogger.getAvailableLevel().addAll(
 					buildAvailableLevels(currentLevel));
 			group.getActiveLoggers().add(activeLogger);
 
 		}
+
+		group.sortList();
 
 		return Response.ok().entity(group).build();
 

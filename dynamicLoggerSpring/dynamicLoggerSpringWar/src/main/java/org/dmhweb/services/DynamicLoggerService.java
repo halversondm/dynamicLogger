@@ -84,6 +84,8 @@ public class DynamicLoggerService {
 
 		}
 
+		group.sortList();
+
 		return Response.ok().entity(group).build();
 
 	}
