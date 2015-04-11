@@ -1,6 +1,5 @@
+<!-- 
 <server description="dynamicLoggerTestServer">
-
-	<!-- Enable features -->
 	<featureManager>
 		<feature>servlet-3.0</feature>
 		<feature>wasJmsClient-1.1</feature>
@@ -45,3 +44,5 @@
 		</application-bnd>
 	</enterpriseApplication>
 </server>
+
+-->
